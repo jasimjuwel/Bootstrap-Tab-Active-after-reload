@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Tab Active after Reload Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h2>How to Create Tab in Bootstrap and Keep Current Tab active on page Reload or page Redirection using HTML local Storage Object</h2>
+  <p>To make the tabs toggleable, add the data-toggle="tab" attribute to each link. Then add a .tab-pane class with a unique ID for every tab and wrap them inside a div element with class .tab-content.</p>
+
+  <ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>HOME</h3>
+   <h2> This page is active all the time when i load the page</h2>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Menu 1</h3>
+      <p>Menu 1 Content Goes here</p>
+      
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Menu 2</h3>
+      <p>Menu 2 Content Goes here</p>
+            
+       </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Menu 3 Content Goes here</p>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+		localStorage.setItem('activeTab', $(e.target).attr('href'));
+	});
+	var activeTab = localStorage.getItem('activeTab');
+	if(activeTab){
+		$('#myTab a[href="' + activeTab + '"]').tab('show');
+	}
+});
+</script>
+</body>
+</html>
